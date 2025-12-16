@@ -38,15 +38,17 @@ class _WeatherPageState extends State<WeatherPage> {
 String getWeatherAnimation(String? mainCondition){
   if(mainCondition == null) return 'assets/Sun.json';
 
-  switch(mainCondition){
-    case 'Clouds':
+  switch(mainCondition.toLowerCase()){
+    case 'clouds':
       return 'assets/Cloud.json';
-    case 'Rain':
+    case 'rain':
       return 'assets/Rain.json';
-    case 'Snow':
+    case 'snow':
       return 'assets/Snow.json';
-    case 'Thunderstorm':
-      return 'assets/Thunderstorm.json';
+    case 'thunderstorm':
+      return 'assets/Heavy Rain.json';
+    case 'sun and rain':
+      return 'assets/Sun & Rain.json';
     default:
       return 'assets/Sun.json';
   }
@@ -71,10 +73,10 @@ String getWeatherAnimation(String? mainCondition){
       Text(_weather?.cityName ?? "Loading..."),         
 
       //animation
-      Lottie.asset('assets/Cloud.json'),
+      Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
 
       //temperature
-      Text('${_weather?.temperature.round()} °C')
+      Text('${_weather?.temperature.round()} °C'),
 
       //weather condition
       Text(_weather?.mainCondition ?? "")
