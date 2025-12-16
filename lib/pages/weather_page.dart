@@ -20,10 +20,17 @@ class _WeatherPageState extends State<WeatherPage> {
   _fetchWeather() async{
 
   //get the current city
-  String cityName = await _weatherService.getCurrentCity();
-
-  //get weather for that city
   try{
+    String cityName = await _weatherService.getCurrentCity();
+    print("City: $cityName"); // debug line
+    
+    // Fallback city if location fails (especially for web)
+    if(cityName.isEmpty){
+      cityName = "Manila"; // default city
+      print("Using fallback city: $cityName");
+    }
+
+    //get weather for that city
     final weather = await _weatherService.getWeather(cityName);
     setState(() {
       _weather = weather;
@@ -31,7 +38,7 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   catch(e){
-    print(e);
+    print("ERROR: $e"); // show full error
   }
   }
   //weather animations
@@ -79,7 +86,7 @@ String getWeatherAnimation(String? mainCondition){
       Text('${_weather?.temperature.round()} °C', style: TextStyle(fontSize: 28),),
 
       //weather condition
-      Text(_weather?.mainCondition ?? "", style: TextStyle(fontSize: 24),),
+      Text(_weather?.mainCondition ?? "", style: TextStyle(fontSize: 25),),
         ],
         )
        )
