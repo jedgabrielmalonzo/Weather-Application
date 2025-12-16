@@ -70,16 +70,16 @@ String getWeatherAnimation(String? mainCondition){
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       //city name
-      Text(_weather?.cityName ?? "Loading..."),         
+      Text(_weather?.cityName ?? "Loading...", style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),         
 
       //animation
       Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
 
       //temperature
-      Text('${_weather?.temperature.round()} °C'),
+      Text('${_weather?.temperature.round()} °C', style: TextStyle(fontSize: 28),),
 
       //weather condition
-      Text(_weather?.mainCondition ?? "")
+      Text(_weather?.mainCondition ?? "", style: TextStyle(fontSize: 24),),
         ],
         )
        )
